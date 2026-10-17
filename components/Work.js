@@ -2,6 +2,7 @@ import Reveal from "@/components/Reveal";
 import SectionHead from "@/components/SectionHead";
 import ProjectCover from "@/components/ProjectCover";
 import Icon from "@/components/Icon";
+import ShowMore from "@/components/ShowMore";
 import { projects } from "@/lib/data";
 
 export function ProjectCard({ project: p }) {
@@ -39,6 +40,9 @@ export function ProjectCard({ project: p }) {
   );
 }
 
+// Projects with a live link come first; the rest sit behind "See more".
+const ordered = [...projects.filter((p) => p.url), ...projects.filter((p) => !p.url)];
+
 export default function Work() {
   return (
     <section id="work" className="mx-auto max-w-6xl px-5 py-24 sm:px-6 md:py-32">
@@ -48,13 +52,13 @@ export default function Work() {
         accent="projects"
         intro="Web apps for product teams, websites for growing businesses and Shopify stores for D2C brands."
       />
-      <div className="grid gap-6 md:grid-cols-2">
-        {projects.map((p, i) => (
+      <ShowMore initial={5} className="grid gap-6 md:grid-cols-2">
+        {ordered.map((p, i) => (
           <Reveal key={p.title} delay={(i % 2) * 0.12}>
             <ProjectCard project={p} />
           </Reveal>
         ))}
-      </div>
+      </ShowMore>
     </section>
   );
 }
