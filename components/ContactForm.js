@@ -20,22 +20,34 @@ export default function ContactForm({ defaultService = "" }) {
   async function onSubmit(e) {
     e.preventDefault();
     const form = e.currentTarget;
-    const data = { ...Object.fromEntries(new FormData(form)), service, budget };
+    const { company_website, ...fields } = Object.fromEntries(new FormData(form));
     if (!service) {
       setStatus("error");
       setError("Please pick what you need.");
       return;
     }
+    // Bots fill the hidden honeypot field; pretend success so they move on.
+    if (company_website) {
+      setStatus("sent");
+      return;
+    }
     setStatus("sending");
     setError("");
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: site.web3formsKey,
+          subject: `New lead: ${service} — ${fields.name}`.slice(0, 150),
+          from_name: "Portfolio Leads",
+          ...fields,
+          service,
+          budget: budget || "—",
+        }),
       });
       const json = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(json.error || "Something went wrong.");
+      if (!res.ok || !json.success) throw new Error(json.message || "Couldn't send right now.");
       setStatus("sent");
       form.reset();
     } catch (err) {

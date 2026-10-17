@@ -14,8 +14,8 @@ npm run build && npm start
 
 1. **`lib/site.js`** — set `url` to your real domain (used by sitemap, canonical URLs, OG image).
    Optional: paste a Calendly / Cal.com link in `bookingUrl` so "Book a free call" opens it.
-2. **`.env.local`** — copy `.env.example` and add your Brevo keys so the contact form emails you.
-   On Vercel: Project → Settings → Environment Variables.
+2. **Contact form** — sent through [Web3Forms](https://web3forms.com). The access key is `web3formsKey`
+   in `lib/site.js`; leads go to the email the key was created with. No env variables needed.
 3. **Project screenshots** — put images in `public/work/` and add `image: "/work/honey-bagh.jpg"`
    to that project in `lib/data.js`. Until then a colour cover is shown.
 
@@ -28,7 +28,7 @@ npm run build && npm start
 | Colours and fonts | `app/globals.css` (`@theme`) |
 | Home page sections | `app/page.js` → `components/` |
 | Service pages (SEO landing pages) | `app/services/[slug]/page.js` |
-| Contact form email | `app/api/contact/route.js` |
+| Contact form | `components/ContactForm.js` |
 
 ## SEO included
 
