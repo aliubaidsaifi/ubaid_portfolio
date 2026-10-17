@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #f6f4ef;
+  --color-surface: #ffffff;
+  --color-fg: #151515;
+  --color-muted: #5b5852;
+  --color-faint: #6f6b64;
+  --color-line: #e3dfd6;
+  --color-accent: #ff5a1f;
+  --color-peach: #ffe2d1;
+  --color-mint: #d9f2e2;
+  --color-lilac: #e6e1ff;
+  --color-sun: #fff0b3;
+  --color-sky: #dbeafe;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* faint dot grid used behind the hero board */
+.dots {
+  background-image: radial-gradient(#d9d4c9 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee { animation: marquee 34s linear infinite; }
+
+@keyframes ping {
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+.ping { animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee, .ping { animation: none; }
+}

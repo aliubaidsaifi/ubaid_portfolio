@@ -1,0 +1,23 @@
+{
+  "name": "ubaid-saifi-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@fontsource/instrument-serif": "5.2.6",
+    "geist": "1.4.2",
+    "motion": "12.23.12",
+    "next": "15.5.28",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.1.13",
+    "tailwindcss": "4.1.13"
+  }
+}
